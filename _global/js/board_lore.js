@@ -1,11 +1,40 @@
 window.onload = function startMain(){
-    var html = document.querySelectorAll('board')[0].innerHTML;
-    document.querySelectorAll('board')[0].innerHTML = replaceIcon(html);
+    const board = document.querySelectorAll('board')[0];
+    var html = board.innerHTML;
+    board.innerHTML = replaceIcon(html);
     adjustComplexityValue();
     createPowerProperties();
+    addImages(board)
 	
 	setTimeout(() => {resize()}, 200);
 }
+
+function addImages(board) {
+
+    const spiritImage = board.getAttribute('spirit-image');
+	const artistCredit = document.getElementsByTagName('artist-name');
+    const spiritBorder = board.getAttribute('spirit-border');
+
+    const imageSize = board.getAttribute('spirit-image-scale');
+
+    if(spiritBorder){
+        const specialRules = board.querySelectorAll('special-rules-container')[0]
+		const spiritBorderSize = board.getAttribute('spirit-border-scale');
+		if(spiritBorderSize){
+			borderHeight = spiritBorderSize;
+			specialRules.innerHTML = `<div class="spirit-border" style="background-image: url(${spiritBorder}); background-size: 705px ${borderHeight};" ></div>` + specialRules.innerHTML
+		}else{
+			specialRules.innerHTML = `<div class="spirit-border" style="background-image: url(${spiritBorder});" ></div>` + specialRules.innerHTML
+		}
+    }
+    if(spiritImage){
+        //Image now scales to fill gap. 'imageSize' allows the user to specify what % of the gap to cover
+        board.innerHTML = `<div class="spirit-image" style="background-image: url(${spiritImage}); background-size: auto ${imageSize}; height:100%; width:100%;" ></div>` + board.innerHTML
+		artistCredit[0].style.display = "block";
+		artistCredit[0].innerHTML = "Artist Credit: "+ artistCredit[0].innerHTML
+    }
+}
+
 
 function resize() {
 	dynamicSizing(document.querySelectorAll('lore-description')[0]);

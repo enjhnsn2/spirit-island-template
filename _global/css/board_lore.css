@@ -61,12 +61,24 @@ spirit-name {
 }
 
 .spirit-image {
+  position: absolute;
+  left: 16.5px;
+  top: 17.75px;
+  width: 667.5px;
+  height: calc(100% - (17.75px * 2));
+  z-index: -1;
+  background-repeat: no-repeat;
+}
+
+/*
+.spirit-image {
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
     z-index: -1;
 }
+*/
 
 lore-description{
     position: absolute;

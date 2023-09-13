@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="../../_global/css/global.css" rel="stylesheet" />
+    <link href="../../_global/css/board_front.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../_global/js/general.js"></script>
+    <script type="text/javascript" src="../../_global/js/board_front.js"></script>
+
+<!-- 	Custom Icons. Instructions
+				1) place image in same folder as HTLM (this file)
+				2) replace demo file name with your file name below
+				3) use custom1, custom2, or custom3 in your HTLM to reference
+-->
+	<style>
+	icon.custom1{background-image: url('demo_custom_icon.png'); }
+	icon.custom2{background-image: url('filename.png'); }
+	icon.custom3{background-image: url('filename.png'); }
+	</style>
+
+</head>
+
+<body>
+
+  <board spirit-image="Silly_Student.png" spirit-image-scale="100%" spirit-image-offset-left=-200px spirit-image-offset-top=-15px spirit-border="example2.png">
+
+    <spirit-name>
+      Silly Student Thinks it Through
+    </spirit-name>
+	<artist-name>
+
+	</artist-name>
+
+    <special-rules-container>
+      <section-title>SPECIAL RULES</section-title>
+      <special-rules-subtitle>Rivers Domain</special-rules-subtitle>
+      <special-rule>
+        You forget powers when using them.
+      </special-rule>
+      <special-rules-subtitle>Rivers Domain</special-rules-subtitle>
+      <special-rule>
+        When you forget a power, prepare 1 {star}.
+      </special-rule>
+    </special-rules-container>
+
+    <right>
+
+      <growth title="Growth (Pick Two)">
+        <growth-group values="gain-power-card;add-presence(1)"></growth-group>
+        <growth-group values="gain-power-card;gain-energy(2)"></growth-group>
+        <growth-group values="gain-power-card;gain-power-card"></growth-group>
+        <growth-group values="gain-power-card;gain-card-play"></growth-group>
+    </growth>
+
+    <presence-tracks>
+      <energy-track values="0,2,3,4,5,5+star,8"></energy-track>
+      <card-play-track values="1,2,2,3,gain-card-pay-2,4"></card-play-track>
+    </presence-tracks>
+
+    <innate-powers>
+      <quick-innate-power
+        name="Massive Flooding"
+        speed="fast"
+        range="none"
+        target="YOURSELF"
+        target-title="TARGET"
+		>
+        <level threshold="1-sun,1-moon,1-fire,1-air,1-water,1-earth,1-plant,1-animal">
+          {reclaim-one} minor / innate.
+        </level>
+        <level threshold="2-sun,2-moon,2-fire,2-air,2-water,2-earth,2-plant,2-animal">
+            {reclaim-one} major .
+        </level>
+      </quick-innate-power>
+
+	    <quick-innate-power
+          name="Massive Flooding"
+          speed="slow"
+          range="none"
+          target="ANY"
+          target-title="TARGET LAND"
+		  >
+          <level threshold="3-sun,OR,3-moon,OR,3-fire,OR,3-air,OR,3-water,OR,3-earth,OR,3-plant,OR,3-animal">
+              All "up to" instructions on minor powers must be used at max value. Treat all "OR"s as "AND"s.
+          </level>
+        <level threshold="6-sun,OR,6-moon,OR,6-fire,OR,6-air,OR,6-water,OR,6-earth,OR,6-plant,OR,6-animal">
+           All "up to" instructions on major powers must be used at max value. Treat all "OR"s as "AND"s.
+        </level>
+      </quick-innate-power>
+    </innate-powers>
+  </right>
+  </board>
+</body>
+
+</html>

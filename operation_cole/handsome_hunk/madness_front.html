@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="../../_global/css/global.css" rel="stylesheet" />
+    <link href="../../_global/css/board_front.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../_global/js/general.js"></script>
+    <script type="text/javascript" src="../../_global/js/board_front.js"></script>
+	
+<!-- 	Custom Icons. Instructions 
+				1) place image in same folder as HTLM (this file) 
+				2) replace demo file name with your file name below 
+				3) use custom1, custom2, or custom3 in your HTLM to reference 
+-->
+	<style>
+	icon.custom1{background-image: url('demo_custom_icon.png'); }
+	icon.custom2{background-image: url('filename.png'); }
+	icon.custom3{background-image: url('filename.png'); }
+	</style>
+	
+</head>
+
+<body>
+
+  <board spirit-image="madness.png" spirit-image-scale="100%"  spirit-border="madness-swoosh.png">
+    
+    <spirit-name>
+      Handsome Hunk is Down with the Cause
+    </spirit-name>
+	<artist-name>
+
+	</artist-name>
+
+    <special-rules-container>
+      <section-title>SPECIAL RULES</section-title>
+      <special-rules-subtitle>Peace and Love, Baby</special-rules-subtitle>
+      <special-rule>
+		Powers used by Handsome Hunk cannot generate fear. Powers that would destroy invaders instead remove them.      </special-rule>
+      <special-rules-subtitle>Manly Sacrifice</special-rules-subtitle>
+      <special-rule>
+		When the placement of blight would remove one or more spirit's presence on a land, you may remove one of your presence on that land to precent all other removals.
+      </special-rule>
+    </special-rules-container>
+
+    <right>
+		<!-- GROWTH  
+			Examples include: reclaim-all; reclaim-one; move-presence(1); gain-energy(2);
+			Gaining Elements: gain-element(water,fire); gain-element(water,2);
+			Adding Presence: add-presence(1); add-presence(1,jungle); add-presence(2,town,city,blight,or); add-presence(2,strife,city,and);
+			
+			Sub-Groups of Growth are possible (think Lure)
+			Example: <sub-growth title="pick one of:" bordered>   here 'bordered' creates the double line border
+					 </sub-growth>
+		-->
+		<growth title="Growth (Pick <u>Two</u>)">
+			<growth-group values="reclaim-all"></growth-group>
+			<growth-group values="gain-power-card"></growth-group>
+			<growth-group values="add-presence(1,no-own-presence)"></growth-group>
+			<growth-group values="move-presence(2)"></growth-group>
+			<growth-group values="gain-energy(3)"></growth-group>
+		</growth>
+
+		<presence-tracks>
+		  <energy-track banner="madness-swoosh.png" banner-v-scale="50%" values="1,2,3,moon,4,air,5"></energy-track>
+		  <card-play-track banner="madness-swoosh.png" banner-v-scale="50%" values="1,2,sun,3,water,4"></card-play-track>
+		</presence-tracks>
+
+		<!-- INNATE POWERS  
+			To create powers which scale with elements ("For Each"), use the shortcut {fire,2} to include the numeral
+			Tokens can be included in level thresholds (as seen on Many Minds). Try '1-dahan','2-beast','3-wilds',etc.
+			speed: "fast" or "slow"
+		-->
+    <innate-powers>
+      <quick-innate-power
+        name="Convert to the Island Lifestyle"
+        speed="fast"
+        range="presence,0"
+        target="Any"
+        target-title="TARGET">
+        <level threshold="1-sun,1-air">
+		Replace 1 {explorer} with {dahan}. 
+        </level>
+        <level threshold="2-sun,2-air,1-water">
+		Instead, replace 1 {town}
+        </level>
+      </quick-innate-power>
+      <quick-innate-power
+      name="Hangin' with the Bros"
+      speed="fast"
+      range="presence,0"
+      target="Any"
+      target-title="TARGET">
+      <level threshold="1-sun,1-earth">
+        Defend 1 per spirit with presence in target land.
+      </level>
+      <level threshold="2-sun,1-earth,1-water">
+      Each spirit in target land may gain 1 energy.
+
+      </level>
+      </quick-innate-power>
+    </innate-powers>
+  </right>
+  </board>
+</body>
+
+</html>

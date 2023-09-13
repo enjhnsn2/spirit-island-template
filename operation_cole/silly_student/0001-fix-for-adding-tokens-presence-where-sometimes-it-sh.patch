@@ -1,0 +1,137 @@
+From 57d8aa579465b6fd67df852af7fe612629353cc2 Mon Sep 17 00:00:00 2001
+From: resonant-gamedesign
+ <44596045+resonant-gamedesign@users.noreply.github.com>
+Date: Fri, 27 May 2022 10:51:24 -0500
+Subject: [PATCH] fix for adding tokens/presence where sometimes it showed up
+ inline instead of vertical
+
+---
+ _global/css/board_front/growth-options.css | 33 ++++++++++++++++++----
+ _global/js/board_front.js                  | 15 +++++-----
+ 2 files changed, 36 insertions(+), 12 deletions(-)
+
+diff --git a/_global/css/board_front/growth-options.css b/_global/css/board_front/growth-options.css
+index d45004e..ca4b117 100644
+--- a/_global/css/board_front/growth-options.css
++++ b/_global/css/board_front/growth-options.css
+@@ -181,13 +181,14 @@ custom-presence-req {
+     font-size: 20pt;
+     font-weight: bold;
+     margin-top: -34px;
+-    margin-bottom: 15px;
++    margin-bottom: 0px;
+     width: auto;
+-    height: 110px;
+-    display: block;
++    height: 125px;
++    display: inline-flex;
++    flex-direction: column;
+ }
+ 
+-custom-presence, custom-presence-or {
++custom-presence {
+   font-size: 20pt;
+   font-weight: bold;
+   display: block;
+@@ -198,6 +199,18 @@ custom-presence, custom-presence-or {
+   margin-top: 11px;
+ }
+ 
++
++custom-presence-or {
++	font-size: 20pt;
++    font-weight: bold;
++    display: block;
++    margin-top: 5px;
++    width: auto;
++    height: 40px;
++    margin-bottom: 0px;
++    margin-top: 36px;
++}
++
+ custom-presence-or icon.backslash {
+     width: 8px;
+     height: 25px;
+@@ -236,6 +249,14 @@ custom-presence icon.range-4 {
+   margin-bottom: 10px;
+ }
+ 
++custom-presence-req icon.range-0,
++custom-presence-req icon.range-1,
++custom-presence-req icon.range-2,
++custom-presence-req icon.range-3,
++custom-presence-req icon.range-4 {
++  margin-bottom: -5px;
++}
++
+ custom-presence-req icon.dahan {
+     display: block;
+     height: 45px;
+@@ -383,11 +404,13 @@ growth-cell icon.ignore-range {
+ custom-icon {
+     font-size: 20pt;
+     font-weight: bold;
+-    display: block;
++    display: flex;
+     margin-top: -31px;
+     width: auto;
+     height: 122px;
+     margin-bottom: 0px;
++    flex-direction: column;
++    align-items: center;
+ }
+ 
+ custom-icon .token {
+diff --git a/_global/js/board_front.js b/_global/js/board_front.js
+index e571ad2..b34fc12 100644
+--- a/_global/js/board_front.js
++++ b/_global/js/board_front.js
+@@ -410,9 +410,9 @@ function parseGrowthTags(){
+                                         break;
+                                     case 'or':
+                                         //add presence or token
+-										presenceReqOpen = "<custom-presence-or>";
+-										presenceReqClose = "</custom-presence-or>";
+-                                        presenceIcon = "{backslash}{"+presenceOptions[2]+"}";
++										presenceReqOpen = "<custom-presence-req><custom-presence-or>";
++										presenceReqClose = "</custom-presence-req>";
++                                        presenceIcon = "{backslash}{"+presenceOptions[2]+"}</custom-presence-or>";
+                                         presenceText += " or a " + Capitalise(presenceOptions[2]);
+                                     case 'instead':
+                                         //no option to add presence, just token
+@@ -904,7 +904,7 @@ function parseGrowthTags(){
+ 							tokenText = "MUST use AND or OR"
+ 						}
+ 					}
+-					growthIcons = tokenReqOpen + tokenIcons + tokenRange + tokenReqClose;
++					growthIcons = tokenReqOpen +'<wrap>'+ tokenIcons+'</wrap>' + tokenRange + tokenReqClose;
+ 					growthText = tokenText
+ 					break;
+ 				}
+@@ -1761,7 +1761,6 @@ function dynamicCellWidth() {
+ 	
+ 	// Shrink Innate Power notes if needed for space
+ 	var innatePowerBox = document.getElementsByTagName("innate-powers")[0];
+-	console.log(innatePowerBox);
+ 	let k = 0;
+ 	if(checkOverflowHeight(innatePowerBox)){
+ 		console.log('IP overflowing, shrinking notes (if applicable)...')
+@@ -1769,11 +1768,13 @@ function dynamicCellWidth() {
+ 		tallest = 0;
+ 		tallest_index = 0;
+ 		for(i = 0; i < descriptionContainers.length; i++){
+-			if(descriptionContainers[i].clientheight > tallest){
+-				tallest = descriptionContainers[i].clientheight;
++			console.log('client height = '+descriptionContainers[i].clientHeight)
++			if(descriptionContainers[i].clientHeight > tallest){
++				tallest = descriptionContainers[i].clientHeight;
+ 				tallest_index = i
+ 			}
+ 		}
++		console.log('tallest is: ' + tallest_index)
+ 		while(checkOverflowHeight(innatePowerBox)){
+ 			noteBox = descriptionContainers[tallest_index].getElementsByTagName("note")[0]
+ 			if(noteBox){
+-- 
+2.34.1
+

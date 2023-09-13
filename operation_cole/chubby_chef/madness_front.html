@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="../../_global/css/global.css" rel="stylesheet" />
+    <link href="../../_global/css/board_front.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../_global/js/general.js"></script>
+    <script type="text/javascript" src="../../_global/js/board_front.js"></script>
+	
+<!-- 	Custom Icons. Instructions 
+				1) place image in same folder as HTLM (this file) 
+				2) replace demo file name with your file name below 
+				3) use custom1, custom2, or custom3 in your HTLM to reference 
+-->
+	<style>
+	icon.custom1{background-image: url('demo_custom_icon.png'); }
+	icon.custom2{background-image: url('filename.png'); }
+	icon.custom3{background-image: url('filename.png'); }
+	</style>
+	
+</head>
+
+<body>
+
+  <board spirit-image="madness.png" spirit-image-scale="100%"  spirit-border="madness-swoosh.png">
+    
+    <spirit-name>
+      Chubby Chef Chops it Up
+    </spirit-name>
+	<artist-name>
+
+	</artist-name>
+
+    <special-rules-container>
+      <section-title>SPECIAL RULES</section-title>
+      <special-rules-subtitle>Yummy!</special-rules-subtitle>
+      <special-rule>
+      Some of your abilities consume tokens. Upon consuming three or more tokens in a land on a single turn, add one Dahan if there are alread Dahan present.      
+    </special-rules-container>
+
+    <right>
+		<!-- GROWTH  
+			Examples include: reclaim-all; reclaim-one; move-presence(1); gain-energy(2);
+			Gaining Elements: gain-element(water,fire); gain-element(water,2);
+			Adding Presence: add-presence(1); add-presence(1,jungle); add-presence(2,town,city,blight,or); add-presence(2,strife,city,and);
+			
+			Sub-Groups of Growth are possible (think Lure)
+			Example: <sub-growth title="pick one of:" bordered>   here 'bordered' creates the double line border
+					 </sub-growth>
+		-->
+		<growth title="Growth (Pick <u>One</u>)">
+			<growth-group values="add-presence(2);gain-power-card"></growth-group>
+			<growth-group values="add-presence(0);gather(strife);gather(beast);gather(wilds))"></growth-group>
+		</growth>
+
+		<presence-tracks>
+		  <energy-track banner="madness-swoosh.png" banner-v-scale="50%" values="1,2,3,moon,4,air,5"></energy-track>
+		  <card-play-track banner="madness-swoosh.png" banner-v-scale="50%" values="1,2,sun,3,water,4"></card-play-track>
+		</presence-tracks>
+
+		<!-- INNATE POWERS  
+			To create powers which scale with elements ("For Each"), use the shortcut {fire,2} to include the numeral
+			Tokens can be included in level thresholds (as seen on Many Minds). Try '1-dahan','2-beast','3-wilds',etc.
+			speed: "fast" or "slow"
+		-->
+    <innate-powers>
+      <quick-innate-power
+        name="Portal of Madness"
+        speed="fast"
+        range="none"
+        target="YOURSELF"
+        target-title="TARGET">
+        <level threshold="2-moon,1-air">
+				Draw the top card from the Madness deck and resolve the Terror Level I effect. Effects in lands apply only on boards with your {sacred-site}. If the card refers to "each player”, only count players whose spirits have {presence} in one of your lands.
+        </level>
+        <level threshold="3-moon,2-air,1-water">
+          As above, but apply the Terror Level II effect instead.
+        </level>
+        <level threshold="4-moon,3-air,3-water">
+          As above, but apply the Terror Level III effect instead.
+        </level>
+      </quick-innate-power>
+      <quick-innate-power
+      name="From a Place Outside of Time"
+      speed="slow"
+      range="none"
+      target="YOURSELF"
+      target-title="TARGET">
+      <level threshold="3-sun">
+        Turn the top card of the Madness deck face-up.
+      </level>
+      </quick-innate-power>
+    </innate-powers>
+  </right>
+  </board>
+</body>
+
+</html>
